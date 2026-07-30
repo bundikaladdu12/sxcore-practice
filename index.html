@@ -1,1 +1,165 @@
-<h1>hello SxCoreAI</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoseMate - Smart MedCare</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #FDFBF7; /* Light Cream Theme */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: #FFFFFF;
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2C3E50;
+            margin-bottom: 5px;
+        }
+        
+        p.subtitle {
+            text-align: center;
+            font-size: 0.9em;
+            color: #7F8C8D;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 12px;
+            border: 1px solid #E0E0E0;
+            border-radius: 10px;
+            background: #F9F9F9;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #3498DB;
+            background: #FFF;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #3498DB;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #2980B9;
+        }
+
+        .reminder-list {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .reminder-card {
+            background: #FDFBF7;
+            padding: 15px;
+            border-left: 5px solid #2ECC71;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .delete-btn {
+            background: #E74C3C;
+            width: auto;
+            padding: 5px 10px;
+            font-size: 0.8em;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>DoseMate</h2>
+        <p class="subtitle">Your Smart Prescription Reminder</p>
+
+        <div class="input-group">
+            <input type="text" id="medName" placeholder="Medicine Name (e.g., Paracetamol)" required>
+            <input type="time" id="medTime" required>
+            <button onclick="addReminder()">Add Reminder</button>
+        </div>
+
+        <div class="reminder-list" id="reminders">
+            <!-- Reminders yahan dikhenge -->
+        </div>
+    </div>
+
+    <script>
+        // Interactive Logic
+        function addReminder() {
+            let name = document.getElementById('medName').value;
+            let time = document.getElementById('medTime').value;
+
+            if(name === '' || time === '') {
+                alert("Please enter both medicine name and time!");
+                return;
+            }
+
+            let list = document.getElementById('reminders');
+            let card = document.createElement('div');
+            card.className = 'reminder-card';
+            card.innerHTML = `
+                <div>
+                    <strong>${name}</strong><br>
+                    <small>⏰ ${time}</small>
+                </div>
+                <button class="delete-btn" onclick="this.parentElement.remove()">Done</button>
+            `;
+
+            list.appendChild(card);
+            
+            // Clear inputs
+            document.getElementById('medName').value = '';
+            document.getElementById('medTime').value = '';
+        }
+    </script>
+</body>
+</html>
